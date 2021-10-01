@@ -24,11 +24,11 @@ const TodoList = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [data]);
 
   if (loading) return "Loading...";
   if (error) return "Error!";
-  console.log(data);
+
   return (
     <div>
       {data.map((todos) => (
