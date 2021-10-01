@@ -30,9 +30,19 @@ const TodoList = () => {
   if (error) return "Error!";
 
   return (
-    <div>
+    <div className='flex flex-col justify-center items-center pt-10'>
       {data.map((todos) => (
-        <p key={todos.id}>{todos.title}</p>
+        <p
+          className='border border-black border-opacity-100 pt-3 w-72 text-center rounded'
+          key={todos.id}
+        >
+          {todos.title}
+          <input
+            type='submit'
+            value='Delete'
+            className='bg-red-600 text-white w-20 ml-10 rounded-3xl  '
+          />
+        </p>
       ))}
     </div>
   );
