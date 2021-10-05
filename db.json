@@ -1,32 +1,16 @@
 {
   "todos": [
     {
-      "title": "Clean",
-      "id": 1
-    },
-    {
-      "title": "Read",
-      "id": 2
-    },
-    {
-      "title": "Call my mother",
-      "id": 3
-    },
-    {
-      "title": "Workout",
-      "id": 4
-    },
-    {
-      "title": "basket",
-      "id": 5
+      "title": "Alex",
+      "id": 9
     },
     {
       "title": "sam",
-      "id": 6
+      "id": 10
     },
     {
       "title": "test",
-      "id": 7
+      "id": 11
     }
   ]
 }

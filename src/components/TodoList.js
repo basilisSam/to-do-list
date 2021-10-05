@@ -28,10 +28,15 @@ const TodoList = () => {
   }, []);
 
   const deleteHandler = (id) => {
-    fetch("http://localhost:8000/todos/" + { id }, {
+    fetch("http://localhost:8000/todos/" + id, {
       method: "DELETE",
     }).then(() => {
       setLoading(false);
+      setData(
+        data.filter((todos) => {
+          return todos.id !== id;
+        })
+      );
     });
   };
 
@@ -46,10 +51,11 @@ const TodoList = () => {
           key={todos.id}
         >
           {todos.title}
+
           <input
             type='submit'
             value='Delete'
-            onClick={() => deleteHandler()}
+            onClick={() => deleteHandler(todos.id)}
             className='bg-red-600 text-white w-20 ml-10 rounded-3xl  '
           />
         </p>
