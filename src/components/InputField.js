@@ -6,13 +6,14 @@ function InputFields() {
 
   const handleSubmit = (e) => {
     const todos = { title };
-
+    e.preventDefault();
     fetch("http://localhost:8000/todos/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(todos),
     }).then(() => {
       setLoading(false);
+      window.location.reload(false);
     });
   };
 

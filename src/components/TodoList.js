@@ -4,6 +4,7 @@ const TodoList = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   useEffect(() => {
     fetch("http://localhost:8000/todos")
       .then((response) => {
@@ -24,7 +25,15 @@ const TodoList = () => {
       .finally(() => {
         setLoading(false);
       });
-  }, [data]);
+  }, []);
+
+  const deleteHandler = (id) => {
+    fetch("http://localhost:8000/todos/" + { id }, {
+      method: "DELETE",
+    }).then(() => {
+      setLoading(false);
+    });
+  };
 
   if (loading) return "Loading...";
   if (error) return "Error!";
@@ -40,6 +49,7 @@ const TodoList = () => {
           <input
             type='submit'
             value='Delete'
+            onClick={() => deleteHandler()}
             className='bg-red-600 text-white w-20 ml-10 rounded-3xl  '
           />
         </p>
