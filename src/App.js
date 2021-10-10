@@ -46,10 +46,21 @@ function App() {
       );
     });
   };
+  const editHandler = (id) => {
+    fetch("http://localhost:8000/todos/" + id, {
+      method: "DELETE",
+    }).then(() => {
+      setLoading(false);
+      setTodos(
+        todos.filter((todos) => {
+          return todos.id !== id;
+        })
+      );
+    });
+  };
 
   const handleSubmit = (e, title) => {
     const todo = { title };
-    console.log(todo);
     e.preventDefault();
     fetch("http://localhost:8000/todos/", {
       method: "POST",
@@ -67,7 +78,11 @@ function App() {
     <div className='App'>
       <h1 className='font-sans text-5xl'>THINGS TO DO</h1>
       <InputField handleSubmit={handleSubmit} />
-      <TodoList todos={todos} deleteHandler={deleteHandler} />
+      <TodoList
+        todos={todos}
+        deleteHandler={deleteHandler}
+        editHandler={editHandler}
+      />
       <Footer />
     </div>
   );
