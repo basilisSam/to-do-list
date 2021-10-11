@@ -1,6 +1,6 @@
 import React from "react";
 
-const TodoItem = ({ todos, deleteHandler, editHandler }) => {
+const TodoItem = ({ todos, deleteHandler, handleEditClick }) => {
   return (
     <div className='flex flex-col justify-center items-center pt-2'>
       <p
@@ -18,7 +18,7 @@ const TodoItem = ({ todos, deleteHandler, editHandler }) => {
 
         <button
           className='bg-red-600 text-white w-20 ml-5 rounded-3xl  '
-          onClick={() => editHandler(todos.id)}
+          onClick={() => handleEditClick(todos.id)}
         >
           Edit
         </button>
