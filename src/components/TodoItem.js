@@ -17,7 +17,7 @@ const TodoItem = ({ todos, deleteHandler, handleEditClick }) => {
         </button>
 
         <button
-          className='bg-red-600 text-white w-20 ml-5 rounded-3xl  '
+          className='bg-black text-white w-20 ml-5 rounded-3xl  '
           onClick={() => handleEditClick(todos.id)}
         >
           Edit

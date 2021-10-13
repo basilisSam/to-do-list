@@ -4,6 +4,7 @@ import EditForm from "./components/EditForm";
 import Footer from "./components/Footer";
 import InputField from "./components/InputField";
 import TodoList from "./components/TodoList";
+import SearchTodo from "./components/SearchTodo";
 
 function App() {
   const [todos, setTodos] = useState(null);
@@ -11,6 +12,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [searchTodos, setSearchTodos] = useState(null);
 
   useEffect(() => {
     fetch("http://localhost:8000/todos")
@@ -64,7 +66,7 @@ function App() {
         setTodos([...todos, todo]);
       });
   };
-  //Edit Section****
+  //Edit Form Section**********************************************
   function handleEditInputChange(e) {
     setCurrentTodo({ ...currentTodo, title: e.target.value });
     console.log(currentTodo);
@@ -92,6 +94,17 @@ function App() {
     );
   }
 
+  const handleSearch = (title) => {
+    setSearchTodos(
+      todos.filter((todos) => {
+        console.log(todos);
+        return todos.title.includes(title);
+      })
+    );
+    console.log(title);
+    console.log(searchTodos);
+  };
+
   return (
     <div className='App'>
       <h1 className='font-sans text-5xl'>THINGS TO DO</h1>
@@ -105,11 +118,14 @@ function App() {
       ) : (
         <InputField handleSubmit={handleSubmit} />
       )}
-      <TodoList
-        todos={todos}
-        deleteHandler={deleteHandler}
-        handleEditClick={handleEditClick}
-      />
+      {!loading && (
+        <TodoList
+          todos={todos}
+          deleteHandler={deleteHandler}
+          handleEditClick={handleEditClick}
+        />
+      )}
+      <SearchTodo searchTodos={searchTodos} handleSearch={handleSearch} />
       <Footer />
     </div>
   );

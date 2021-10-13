@@ -12,7 +12,7 @@ export default function EditForm({
         name='updateTodo'
         type='text'
         placeholder='Update todo'
-        value={currentTodo.text}
+        value={currentTodo.title}
         onChange={(e) => {
           handleEditInputChange(e);
         }}
