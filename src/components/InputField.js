@@ -13,6 +13,7 @@ function InputFields({ handleSubmit }) {
           onChange={(e) => setTitle(e.target.value)}
           type='text'
           required
+          placeholder='Add Todo'
           className='border-2 border-red-500 rounded-lg  '
         />
 

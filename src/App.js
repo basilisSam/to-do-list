@@ -93,14 +93,18 @@ function App() {
       })
     );
   }
-
+  //Search Form
   const handleSearch = (title) => {
-    setSearchTodos(
-      todos.filter((todos) => {
-        console.log(todos);
-        return todos.title.includes(title);
-      })
-    );
+    if (title !== "") {
+      setSearchTodos(
+        todos.filter((todos) => {
+          console.log(todos);
+          return todos.title.includes(title);
+        })
+      );
+    } else {
+      setSearchTodos(null);
+    }
     console.log(title);
     console.log(searchTodos);
   };
