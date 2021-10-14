@@ -1,24 +1,24 @@
 import React from "react";
 
-const TodoItem = ({ todos, deleteHandler, handleEditClick }) => {
+const TodoItem = ({ todo, deleteHandler, handleEditClick }) => {
   return (
     <div className='flex flex-col justify-center items-center pt-2'>
       <p
         className='border border-black border-opacity-100 pt-3 w-72 text-center rounded'
-        key={todos.id}
+        key={todo.id}
       >
-        {todos.title}
+        {todo.title}
 
         <button
           className='bg-red-600 text-white w-20 ml-5 rounded-3xl  '
-          onClick={() => deleteHandler(todos.id)}
+          onClick={() => deleteHandler(todo.id)}
         >
           Delete
         </button>
 
         <button
           className='bg-black text-white w-20 ml-5 rounded-3xl  '
-          onClick={() => handleEditClick(todos.id)}
+          onClick={() => handleEditClick(todo.id)}
         >
           Edit
         </button>

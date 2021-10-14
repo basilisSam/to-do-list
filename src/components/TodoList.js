@@ -4,12 +4,12 @@ import TodoItem from "./TodoItem";
 const TodoList = ({ todos, deleteHandler, handleEditClick }) => {
   return (
     <div className='flex flex-col justify-center items-center pt-10'>
-      {todos.map((todos) => (
+      {todos.map((todo) => (
         <TodoItem
-          todos={todos}
+          todo={todo}
           deleteHandler={deleteHandler}
           handleEditClick={handleEditClick}
-          key={todos.id}
+          key={todo.id}
         />
       ))}
     </div>

@@ -8,22 +8,23 @@ import SearchTodo from "./components/SearchTodo";
 
 function App() {
   const [todos, setTodos] = useState(null);
-  const [currentTodo, setCurrentTodo] = useState({});
+  const [todoToBeEdited, setTodoToBeEdited] = useState({});
   const [isEditing, setIsEditing] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchTodos, setSearchTodos] = useState(null);
+  const BASE_URL = "http://localhost:8000/todos/";
 
   useEffect(() => {
-    fetch("http://localhost:8000/todos")
+    fetch(BASE_URL)
       .then((response) => {
         if (response.ok) {
           return response.json();
         }
         throw response;
       })
-      .then((data) => {
-        setTodos(data);
+      .then((todos) => {
+        setTodos(todos);
         setLoading(false);
         setError(null);
       })
@@ -40,7 +41,7 @@ function App() {
   if (error) return "Error!";
 
   const deleteHandler = (id) => {
-    fetch("http://localhost:8000/todos/" + id, {
+    fetch(`${BASE_URL}${id}`, {
       method: "DELETE",
     }).then(() => {
       setLoading(false);
@@ -55,7 +56,7 @@ function App() {
   const handleSubmit = (e, title) => {
     const todo = { title };
     e.preventDefault();
-    fetch("http://localhost:8000/todos/", {
+    fetch(BASE_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(todo),
@@ -66,47 +67,47 @@ function App() {
         setTodos([...todos, todo]);
       });
   };
-  //Edit Form Section**********************************************
-  function handleEditInputChange(e) {
-    setCurrentTodo({ ...currentTodo, title: e.target.value });
-    console.log(currentTodo);
-  }
 
-  function handleEditFormSubmit(e) {
+  const handleEditInputChange = (e) => {
+    setTodoToBeEdited({ ...todoToBeEdited, title: e.target.value });
+  };
+
+  const handleEditFormSubmit = (e) => {
     e.preventDefault();
 
-    handleUpdateTodo(currentTodo.id, currentTodo);
-  }
+    updateTodo(todoToBeEdited.id, todoToBeEdited);
+  };
 
-  function handleUpdateTodo(id, updatedTodo) {
+  const updateTodo = (id, updatedTodo) => {
     const updatedItem = todos.map((todo) => {
       return todo.id === id ? updatedTodo : todo;
     });
     setIsEditing(false);
     setTodos(updatedItem);
-  }
-  function handleEditClick(id) {
+  };
+  const handleEditClick = (id) => {
     setIsEditing(true);
-    setCurrentTodo(
+    setTodoToBeEdited(
       todos.find((todos) => {
         return todos.id === id;
       })
     );
-  }
-  //Search Form
+  };
+
+  const isEmpty = (title) => {
+    return title === "";
+  };
+
   const handleSearch = (title) => {
-    if (title !== "") {
+    if (isEmpty(title)) {
       setSearchTodos(
         todos.filter((todos) => {
-          console.log(todos);
           return todos.title.includes(title);
         })
       );
     } else {
       setSearchTodos(null);
     }
-    console.log(title);
-    console.log(searchTodos);
   };
 
   return (
@@ -114,7 +115,7 @@ function App() {
       <h1 className='font-sans text-5xl'>THINGS TO DO</h1>
       {isEditing ? (
         <EditForm
-          currentTodo={currentTodo}
+          todoToBeEdited={todoToBeEdited}
           setIsEditing={setIsEditing}
           handleEditInputChange={handleEditInputChange}
           handleEditFormSubmit={handleEditFormSubmit}
