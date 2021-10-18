@@ -1,5 +1,5 @@
 export default function EditForm({
-  currentTodo,
+  todoToBeEdited,
   setIsEditing,
   handleEditInputChange,
   handleEditFormSubmit,
@@ -12,7 +12,7 @@ export default function EditForm({
         name='updateTodo'
         type='text'
         placeholder='Update todo'
-        value={currentTodo.title}
+        value={todoToBeEdited.title}
         onChange={(e) => {
           handleEditInputChange(e);
         }}
