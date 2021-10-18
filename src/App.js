@@ -99,7 +99,7 @@ function App() {
   };
 
   const handleSearch = (title) => {
-    if (isEmpty(title)) {
+    if (!isEmpty(title)) {
       setSearchTodos(
         todos.filter((todos) => {
           return todos.title.includes(title);
